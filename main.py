@@ -79,19 +79,19 @@ while seguir:
 
         dia = int(input('Ingrese dia[dd]: '))
 
-        if dia <= 0 or dia > 31:
+        while dia <= 0 or dia > 31:
             print('<Error, Ingrese valores entre 1 y 31...>')
             dia = int(input('Ingrese dia[dd]: '))
 
         mes = int(input('Ingrese mes[mm]: '))
 
-        if mes <= 0 or mes > 12:
+        while mes <= 0 or mes > 12:
             print('<...Error, Ingrese valores entre 1 y 12...>')
             mes = int(input('Ingrese mes[mm]: '))
 
         anio = int(input('Ingrese año[aaaa]: '))
 
-        if anio < 1000 or anio > 9999:
+        while anio < 1000 or anio > 9999:
             print('<...Ingrese cuatro digitos...>')
             anio = int(input('Ingrese año[aaaa]: '))
 
