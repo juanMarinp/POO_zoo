@@ -8,6 +8,7 @@ registro_animal = False
 ver_animal = False
 ver_zoo = False
 seguir = True
+total_id = 0
 
 while seguir:
     print('1 = Ingresar especie\n2 = Ingresar animal\n3 = Ingresar zoologico')
@@ -43,8 +44,14 @@ while seguir:
 
         for x in resultado:
             print(x)
+            total_id += 1
 
         cod_ext = int(input('Ingrese codigo UICN: '))
+
+        while cod_ext <= 0 or cod_ext > total_id:
+            print('<...Codigo invalido...>')
+            cod_ext = int(input('Ingrese codigo UICN: '))
+        total_id = 0
 
         print('ID | NOMBRE')
 
@@ -54,10 +61,15 @@ while seguir:
 
         for x in resultado:
             print(x)
+            total_id += 1
 
         cod_fam = int(input('Ingrese codigo de familia: '))
+        while cod_fam <= 0 or cod_fam > total_id:
+            print('<...Codigo invalido...>')
+            cod_fam = int(input('Ingrese codigo de familia: '))
+        total_id = 0
 
-        val = (nom_vul, nom_cient, cod_ext, cod_ext)
+        val = (nom_vul, nom_cient, cod_ext, cod_fam)
 
         cursor.execute(sql, val)
 
@@ -73,7 +85,7 @@ while seguir:
 
         sql = 'INSERT INTO animal(nombre, nacimiento, fk_sexo, fk_especie, fk_zoo, fk_pais) VALUES(%s, %s, %s, %s, %s, %s)'
 
-        nombre = input('Ingrese nombre: ')
+        nombre = str(input('Ingrese nombre: '))
 
         print('Ingrese fecha de nacimiento: ')
 
@@ -105,8 +117,14 @@ while seguir:
 
         for x in resultado:
             print(x)
+            total_id += 1
 
         sexo = int(input('Ingrese codigo de su sexo:'))
+
+        while sexo <= 0 or sexo > total_id:
+            print('<...Codigo invalido...>')
+            sexo = int(input('Ingrese codigo de su sexo:'))
+        total_id = 0
 
         print('ID | NOMB_VULGAR | NOMB_CIENT')
 
@@ -116,8 +134,14 @@ while seguir:
 
         for x in resultado:
             print(x)
+            total_id += 1
 
-        especie = int(input('Ingrese codigo de especie:'))
+        especie = int(input('Ingrese codigo de especie: '))
+
+        while especie <= 0 or especie > total_id:
+            print('<...Codigo invalido...>')
+            especie = int(input('Ingrese codigo de especie: '))
+        total_id = 0
 
         print('ID | NOMBRE')
 
@@ -127,8 +151,14 @@ while seguir:
 
         for x in resultado:
             print(x)
+            total_id += 1
 
         zoo = int(input('Ingrese codigo de zoologico: '))
+
+        while zoo <= 0 or zoo > total_id:
+            print('<...Codigo invalido...>')
+            zoo = int(input('Ingrese codigo de zoologico: '))
+        total_id = 0
 
         cursor.execute('SELECT id, nombre FROM pais ')
 
@@ -136,8 +166,14 @@ while seguir:
 
         for x in resultado:
             print(x)
+            total_id += 1
 
         pais = int(input('Ingrese codigo de pais de origen: '))
+
+        while pais <= 0 or pais > total_id:
+            print('<...Codigo invalido...>')
+            pais = int(input('Ingrese codigo de pais de origen: '))
+        total_id = 0
 
         val = (nombre, nacimiento, sexo, especie, zoo, pais)
 
@@ -159,7 +195,7 @@ while seguir:
 
         presupuesto = int(input('Ingrese presupuesto: '))
 
-        tamano = input('Ingrese tamaño de zoologico en HA: ')
+        tamano = str(input('Ingrese tamaño de zoologico en HA: '))
 
         cursor.execute('SELECT id, nombre FROM ciudad')
 
@@ -167,8 +203,14 @@ while seguir:
 
         for x in resultados:
             print(x)
+            total_id += 1
 
         ciudad = int(input('Ingrese codigo de ciudad donde se ubica: '))
+
+        while ciudad <= 0 or ciudad > total_id:
+            print('<...Codigo invalido...>')
+            ciudad = int(input('Ingrese codigo de ciudad donde se ubica: '))
+        total_id = 0
 
         val = (nombre, presupuesto, tamano, ciudad)
 
@@ -208,3 +250,5 @@ while seguir:
         continuar = input('Presione Enter para continuar...')
 
         ver_zoo = False
+
+print('<...Hasta pronto!...>')
