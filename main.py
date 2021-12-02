@@ -228,7 +228,7 @@ while seguir:
         cursor.execute('''
         select animal.id, 
             animal.NOMBRE, 
-		    sexo.NOMBRE as 'Sexo', 
+	    sexo.NOMBRE as 'Sexo', 
             especie.NOMBRE_VULGAR as 'Especie', 
             zoologico.NOMBRE as 'Nombre zoo',
             pais.NOMBRE as 'Pais'
