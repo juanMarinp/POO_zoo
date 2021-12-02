@@ -27,7 +27,7 @@ while seguir:
         ver_zoo = True
     if pregunta == 9:
         seguir = False
-
+    #////////////////////////////////////////REGISTRO ESPECIE////////////////////////////////////////
     while registro_especie:
 
         sql = "INSERT INTO especie (nombre_vulgar, nombre_cientifico, codigo_ext, codigo_familia) values (%s, %s, %s, %s);"
@@ -80,7 +80,7 @@ while seguir:
             registro_especie = True
         else:
             registro_especie = False
-    # ----------------REGISTRO ANIMAL-----------------
+    #////////////////////////////////////////REGISTRO ANIMAL////////////////////////////////////////
     while registro_animal:
 
         sql = 'INSERT INTO animal(nombre, nacimiento, fk_sexo, fk_especie, fk_zoo, fk_pais) VALUES(%s, %s, %s, %s, %s, %s)'
@@ -186,7 +186,7 @@ while seguir:
             registro_animal = True
         else:
             registro_animal = False
-
+    # ////////////////////////////////////////REGISTRO ZOOLOGICO////////////////////////////////////////
     while registro_zoo:
 
         sql = 'INSERT INTO zoologico(nombre, presupuesto, tamanio, fk_ciudad) values (%s, %s, %s, %s);'
@@ -223,20 +223,35 @@ while seguir:
             registro_zoo = True
         else:
             registro_zoo = False
-
+    # ////////////////////////////////////////VER ANIMALES////////////////////////////////////////
     if ver_animal:
-        cursor.execute('SELECT id, nombre FROM animal')
+        cursor.execute('''
+        select animal.id, 
+            animal.NOMBRE, 
+		    sexo.NOMBRE as 'Sexo', 
+            especie.NOMBRE_VULGAR as 'Especie', 
+            zoologico.NOMBRE as 'Nombre zoo',
+            pais.NOMBRE as 'Pais'
+        FROM animal INNER JOIN sexo
+        on animal.FK_SEXO = sexo.ID
+        INNER JOIN especie 
+        on animal.FK_ESPECIE = especie.ID
+        INNER JOIN zoologico
+        on animal.FK_ZOO = zoologico.ID
+        INNER JOIN pais 
+        on animal.FK_PAIS = pais.ID
+        ;''')
 
         resultado = cursor.fetchall()
 
-        print('ID | NOMBRE')
+        print('ID| NOMBRE |   SEXO   |   ESPECIE   |   NOMBRE ZOOLOGICO  |   PAIS')
 
         for x in resultado:
             print(x)
         ver_animal = False
 
         continuar = input('Presione Enter para continuar...')
-
+    # ////////////////////////////////////////VER ZOOLOGICOS////////////////////////////////////////
     if ver_zoo:
         cursor.execute('SELECT id, nombre FROM zoologico')
 
